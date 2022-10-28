@@ -5,7 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 nodejs('NodeJS 19.0.0') {
-                    bat "npm -v"
+                    sh 'npm install'
+                    sh 'npm run build'
                 }
             }
         }
