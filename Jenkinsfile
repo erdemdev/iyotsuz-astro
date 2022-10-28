@@ -1,11 +1,12 @@
 pipeline {
     agent any
+    tools (nodejs "node")
 
     stages {
         stage('Build') {
             steps {
-                nodejs(nodeJSInstallationName: 'Node 19.0.0', configId: '<config-file-provider-id>') {
-                    sh 'npm config ls'
+                nodejs('NodeJS 19.0.0') {
+                    bat "npm -v"
                 }
             }
         }
