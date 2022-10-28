@@ -1,0 +1,57 @@
+---
+import { gqlFetch } from '@utils/graphql';
+import { getDirectusImage } from '@utils/image';
+
+const {
+  posts,
+}: {
+  posts: [
+    {
+      title: string;
+      content: string;
+      featured_image: { id: string; title: string };
+    }
+  ];
+} = await gqlFetch(`
+    {
+      posts (filter: {status: {_eq: "published"}}) {
+        title
+        content
+        featured_image {
+          id
+          title
+        }
+      }
+    }
+  `);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Test Run</title>
+  </head>
+  <body class="mx-52">
+    <h1 class="text-9xl text-blue-600 my-16">Astro</h1>
+    {
+      posts.map(async post => (
+        <div>
+          <h2 class="mb-5 text-xl">{post.title}</h2>
+          <img
+            class="mb-5"
+            src={await getDirectusImage(
+              post.featured_image.id,
+              post.featured_image.title,
+              { width: '300', height: '300' }
+            )}
+            alt=""
+          />
+          <p class="mb-12">{post.content}</p>
+        </div>
+      ))
+    }
+  </body>
+</html>

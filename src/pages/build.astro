@@ -1,0 +1,29 @@
+---
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Test Run</title>
+  </head>
+  <body>
+    <a href="https://cicd.musab.cloud/job/iyotsuz-astro-build/"
+      ><img
+        id="status"
+        src="https://cicd.musab.cloud/buildStatus/icon?job=iyotsuz-astro-build&style=flat-square&status=loading&color=lightgrey"
+      />
+    </a>
+    <script is:inline>
+      const imgTag = document.getElementById('status');
+      setInterval(function () {
+        imgTag.setAttribute(
+          'src',
+          'https://cicd.musab.cloud/buildStatus/icon?job=iyotsuz-astro-build&style=flat-square'
+        );
+      }, 2000);
+    </script>
+  </body>
+</html>
